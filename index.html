@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona z przepisami</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #login-container, #content-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #login-form input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        #login-form button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #login-form button:hover {
+            background-color: #218838;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 20px;
+        }
+
+        .recipe {
+            margin: 20px 0;
+        }
+
+        .recipe img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .recipe h2 {
+            margin: 10px 0;
+        }
+
+        .recipe p {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <h1>Wpisz hasło, aby uzyskać dostęp</h1>
+        <form id="login-form">
+            <input type="password" id="password" placeholder="Wpisz hasło">
+            <button type="submit">Zaloguj się</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+
+    <div id="content-container" style="display:none;">
+        <h1>Witamy na stronie z przepisami!</h1>
+
+        <div class="recipe">
+            <h2>Pizza Margherita</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/1024px-Supreme_pizza.jpg" alt="Pizza Margherita">
+            <p>
+                <strong>Składniki:</strong><br>
+                - Ciasto do pizzy<br>
+                - Sos pomidorowy<br>
+                - Mozzarella<br>
+                - Świeża bazylia<br>
+                - Oliwa z oliwek<br><br>
+                <strong>Przygotowanie:</strong><br>
+                1. Rozgrzej piekarnik do 220°C.<br>
+                2. Rozwałkuj ciasto na cienką warstwę.<br>
+                3. Posmaruj sosem pomidorowym, dodaj mozzarellę i świeżą bazylię.<br>
+                4. Skrop oliwą z oliwek.<br>
+                5. Piecz przez 10-12 minut, aż ser się roztopi, a ciasto będzie chrupiące.
+            </p>
+        </div>
+
+        <div class="recipe">
+            <h2>Hamburger klasyczny</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Classic_Burger.jpg" alt="Hamburger">
+            <p>
+                <strong>Składniki:</strong><br>
+                - Bułka do hamburgera<br>
+                - Wołowina mielona<br>
+                - Ser cheddar<br>
+                - Sałata<br>
+                - Pomidor<br>
+                - Cebula<br>
+                - Sos do hamburgera<br><br>
+                <strong>Przygotowanie:</strong><br>
+                1. Uformuj kotleta z wołowiny i usmaż go na patelni, aż będzie dobrze wysmażony.<br>
+                2. Przekrój bułkę na pół i opiecz ją na grillu lub w tosterze.<br>
+                3. Na dolnej części bułki połóż kotleta, plaster sera, sałatę, plaster pomidora i cebulę.<br>
+                4. Posmaruj górną część bułki sosem do hamburgera i przykryj nią resztę składników.
+            </p>
+        </div>
+
+        <div class="recipe">
+            <h2>Frytki domowe</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Fries_2.jpg/1024px-Fries_2.jpg" alt="Frytki">
+            <p>
+                <strong>Składniki:</strong><br>
+                - Ziemniaki<br>
+                - Oliwa z oliwek<br>
+                - Sól<br><br>
+                <strong>Przygotowanie:</strong><br>
+                1. Ziemniaki obierz i pokrój w cienkie paski.<br>
+                2. Wrzuć frytki do miski, dodaj oliwę z oliwek i sól, dobrze wymieszaj.<br>
+                3. Rozgrzej piekarnik do 200°C.<br>
+                4. Rozłóż frytki na blasze wyłożonej papierem do pieczenia w jednej warstwie.<br>
+                5. Piecz przez 25-30 minut, aż frytki będą złote i chrupiące.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;
+        const maxAttempts = 3;
+        const correctPassword = "pizza";
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const enteredPassword = document.getElementById('password').value;
+            
+            if (enteredPassword === correctPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('content-container').style.display = 'block';
+            } else {
+                attempts++;
+                document.getElementById('error-message').innerText = `Błędne hasło. Pozostało prób: ${maxAttempts - attempts}`;
+                if (attempts >= maxAttempts) {
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('error-message').innerText = "Zablokowano dostęp.";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
